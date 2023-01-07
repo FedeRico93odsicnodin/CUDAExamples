@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CudaCompile Include="main.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="schoolbook">
+      <UniqueIdentifier>{029f926a-fb2c-4c49-852f-f95affed437e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="schoolbook\samples_1.h">
+      <Filter>schoolbook</Filter>
+    </ClInclude>
+    <ClInclude Include="schoolbook\common.h">
+      <Filter>schoolbook</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
