@@ -1,11 +1,14 @@
 ﻿  Compiling CUDA source file main.cu...
   
-  E:\GIT\CUDAExamples\CudaExamples>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\HostX64\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /FS /Zi /RTC1 /MDd " -o E:\GIT\CUDAExamples\CudaExamples\x64\Debug\main.cu.obj "E:\GIT\CUDAExamples\CudaExamples\main.cu" 
+  E:\GIT\CUDAExamples\CudaExamples>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\HostX64\x64" -x cu -rdc=true  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /FS /Zi /RTC1 /MDd " -o E:\GIT\CUDAExamples\CudaExamples\x64\Debug\main.cu.obj "E:\GIT\CUDAExamples\CudaExamples\main.cu" 
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(398): warning #181-D: argument is incompatible with corresponding format string conversion
   
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(398): warning #225-D: the format string ends before this argument
   
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(607): warning #550-D: variable "maxDevice" was set but never used
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(1430): warning #1444-D: function "cudaDeviceSynchronize"
+  C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\include\cuda_device_runtime_api.h(139): here was declared deprecated ("Use of cudaDeviceSynchronize from device code is deprecated. Moreover, such use will cause this module to fail to load on sm_90+ devices. If calls to cudaDeviceSynchronize from device code cannot be removed for older devices at this time, you may guard them with __CUDA_ARCH__ macros to remove them only for sm_90+ devices, making sure to generate code for compute_90 for the macros to take effect. Note that this mitigation will no longer work when support for cudaDeviceSynchronize from device code is eventually dropped for all devices. Disable this warning with -D__CDPRT_SUPPRESS_SYNC_DEPRECATION_WARNING.")
   
   main.cu
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(557): warning C4477: 'printf' : format string '%lu' requires an argument of type 'unsigned long', but variadic argument 1 has type 'size_t'
@@ -44,4 +47,25 @@ E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(1319): warning C4018: '<
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(1332): warning C4018: '<': signed/unsigned mismatch
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(1347): warning C4018: '<': signed/unsigned mismatch
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(1379): warning C4018: '<': signed/unsigned mismatch
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(1507): warning C4018: '<': signed/unsigned mismatch
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(1522): warning C4018: '<': signed/unsigned mismatch
+E:\GIT\CUDAExamples\CudaExamples\schoolbook\samples_1.h(1541): warning C4715: 'nestedReduce': not all control paths return a value
+  
+  E:\GIT\CUDAExamples\CudaExamples>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin\nvcc.exe" -dlink -o x64\Debug\CudaExamples.device-link.obj -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /Zi /RTC1 /MDd " -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin/crt" -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\lib\x64" cudart_static.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib cudadevrt.lib cudart.lib  -gencode=arch=compute_52,code=sm_52 -G --machine 64 E:\GIT\CUDAExamples\CudaExamples\x64\Debug\main.cu.obj 
+  cudart_static.lib
+  kernel32.lib
+  user32.lib
+  gdi32.lib
+  winspool.lib
+  comdlg32.lib
+  advapi32.lib
+  shell32.lib
+  ole32.lib
+  oleaut32.lib
+  uuid.lib
+  odbc32.lib
+  odbccp32.lib
+  cudadevrt.lib
+  cudart.lib
+  main.cu.obj
   CudaExamples.vcxproj -> E:\GIT\CUDAExamples\x64\Debug\CudaExamples.exe

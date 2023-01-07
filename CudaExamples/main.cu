@@ -20,6 +20,7 @@ int main()
         printf("9_determiningTheBestGPU\n");
         printf("10_simpleWarpDivergence\n");
         printf("11_reduceInteger\n");
+        printf("12_nestedReduce\n");
         scanf("%d", &selection);
         printf("\n");
         if (selection == 0)
@@ -57,6 +58,9 @@ int main()
             break;
         case 11: 
             reduceInteger();
+            break;
+        case 12: 
+            nestedReduce();
             break;
         }
         printf("press a key to continue");
