@@ -1,3 +1,6 @@
+/*
+    examples from the first 3 chapters of the book 
+*/
 #ifndef __CUDACC__ 
 #define __CUDACC__
 #endif
@@ -1277,7 +1280,7 @@ void reduceInteger() {
     reduceUnrolling2 << <grid.x / 2, block >> > (d_idata, d_odata, size);
     CHECK(cudaDeviceSynchronize());
     iElaps = seconds() - iStart;
-    CHECK(cudaMemcpy(h_odata, d_odata, grid.x / 2 * sizeof(int), cudaMemcpyHostToDevice));
+    CHECK(cudaMemcpy(h_odata, d_odata, grid.x / 2 * sizeof(int), cudaMemcpyDeviceToHost));
 
     gpu_sum = 0;
 
