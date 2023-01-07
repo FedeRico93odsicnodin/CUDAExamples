@@ -15,5 +15,8 @@
     <ClInclude Include="schoolbook\common.h">
       <Filter>schoolbook</Filter>
     </ClInclude>
+    <ClInclude Include="schoolbook\samples_2.h">
+      <Filter>schoolbook</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

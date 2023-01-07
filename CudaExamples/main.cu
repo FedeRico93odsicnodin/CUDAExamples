@@ -1,6 +1,7 @@
 ﻿#include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 #include "schoolbook/samples_1.h"
+#include "schoolbook/samples_2.h"
 #include <stdio.h>
 #include<conio.h>
 int main()
@@ -22,6 +23,12 @@ int main()
         printf("11_reduceInteger\n");
         printf("12_nestedHelloWorld\n");
         printf("13_nestedReduce\n");
+        printf("14_nestedReduce2 (to check)\n");
+        printf("-----------\n");
+        printf("15_globalVariableDeclarationAndModification\n");
+        printf("16_simplemMemTransfer\n");
+        printf("17_sumArraysZeroCopy\n");
+        printf("\n");
         scanf("%d", &selection);
         printf("\n");
         if (selection == 0)
@@ -65,6 +72,18 @@ int main()
             break;
         case 13: 
             nestedReduce();
+            break;
+        case 14: 
+            nestedReduce2();
+            break;
+        case 15:
+            globalVariableDeclarationAndModification();
+            break;
+        case 16: 
+            simplemMemTransfer();
+            break;
+        case 17:
+            sumArraysZeroCopy();
             break;
         }
         printf("press a key to continue");
