@@ -2,6 +2,7 @@
   
   E:\GIT\CUDAExamples\CudaExamples>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\HostX64\x64" -x cu -rdc=true  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /FS /Zi /RTC1 /MDd " -o E:\GIT\CUDAExamples\CudaExamples\x64\Debug\main.cu.obj "E:\GIT\CUDAExamples\CudaExamples\main.cu" 
 E:\GIT\CUDAExamples\CudaExamples\main.cu(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\GIT\CUDAExamples\CudaExamples\main.cu(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(398): warning #181-D: argument is incompatible with corresponding format string conversion
   
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(398): warning #225-D: the format string ends before this argument
@@ -16,6 +17,7 @@ E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(1477): warning #1444-D: 
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(65): warning #226-D: invalid format string conversion
   
 E:\GIT\CUDAExamples\CudaExamples\main.cu(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\GIT\CUDAExamples\CudaExamples\main.cu(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   main.cu
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(557): warning C4477: 'printf' : format string '%lu' requires an argument of type 'unsigned long', but variadic argument 1 has type 'size_t'
   E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(557): note: consider using '%zu' in the format string

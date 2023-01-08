@@ -85,6 +85,7 @@
     <ClInclude Include="schoolbook\samples_1.h" />
     <ClInclude Include="schoolbook\samples_2.h" />
     <ClInclude Include="slides\01_prefixsum.h" />
+    <ClInclude Include="slides\02_mergesort.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include<conio.h>
 #include "../CudaExamples/slides/01_prefixsum.h";
+#include "../CudaExamples/slides/02_mergesort.h";
 // permette di stabilire se abilitare o meno la modalità console per alcuni degli esempi
 int main()
 {
@@ -36,6 +37,9 @@ int main()
         printf("202_prefixsum (third version)\n");
         printf("203_prefixsum (fourth version)\n");
         printf("204_prefixsum (fifth version)\n");
+        printf("-----------\n");
+        printf("205_mergesort\n");
+        printf("206_mergesort (rank single block)\n");
         printf("\n");
         scanf("%d", &selection);
         printf("\n");
@@ -107,6 +111,12 @@ int main()
             break;
         case 204: 
             prefixSumFifthVersion();
+            break;
+        case 205: 
+            sequentialMergeSort();
+            break;
+        case 206: 
+            mergeSortRankBlock();
             break;
         }
         printf("press a key to continue");
