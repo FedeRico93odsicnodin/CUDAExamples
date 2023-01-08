@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include "common.h"
+#include "../common.h"
 
 // EXAMPLE 15: GLOBAL VARIABLE 
 /*

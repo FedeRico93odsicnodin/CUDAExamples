@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include "schoolbook/common.h"
+#include "../common.h"
 
 // 01: simple hello world from GPU 
 __global__ void helloFromGPU(void) {

@@ -4,6 +4,8 @@
 #include "schoolbook/samples_2.h"
 #include <stdio.h>
 #include<conio.h>
+#include "../CudaExamples/slides/01_prefixsum.h";
+// permette di stabilire se abilitare o meno la modalità console per alcuni degli esempi
 int main()
 {
     int selection;
@@ -28,6 +30,8 @@ int main()
         printf("15_globalVariableDeclarationAndModification\n");
         printf("16_simplemMemTransfer\n");
         printf("17_sumArraysZeroCopy\n");
+        printf("\n---- SLIDES EXAMPLES ----\n");
+        printf("200_prefixsum");
         printf("\n");
         scanf("%d", &selection);
         printf("\n");
@@ -85,11 +89,17 @@ int main()
         case 17:
             sumArraysZeroCopy();
             break;
+        case 200:
+            bool en = false;
+            int temp;
+            printf("enable console? (0-1)");
+            scanf("%d", &temp);
+            en = temp;
+            prefixSumFirstVersion(en);
+            break;
         }
         printf("press a key to continue");
         getch();
     } while (selection > 0);
     return 0;
-    
-    
 }
