@@ -31,7 +31,11 @@ int main()
         printf("16_simplemMemTransfer\n");
         printf("17_sumArraysZeroCopy\n");
         printf("\n---- SLIDES EXAMPLES ----\n");
-        printf("200_prefixsum");
+        printf("200_prefixsum\n");
+        printf("201_prefixsum (second version)\n");
+        printf("202_prefixsum (third version)\n");
+        printf("203_prefixsum (fourth version)\n");
+        printf("204_prefixsum (fifth version)\n");
         printf("\n");
         scanf("%d", &selection);
         printf("\n");
@@ -90,12 +94,19 @@ int main()
             sumArraysZeroCopy();
             break;
         case 200:
-            bool en = false;
-            int temp;
-            printf("enable console? (0-1)");
-            scanf("%d", &temp);
-            en = temp;
-            prefixSumFirstVersion(en);
+            prefixSumFirstVersion();
+            break;
+        case 201: 
+            prefixSumSecondVersion();
+            break;
+        case 202: 
+            prefixSumThirdVersion();
+            break;
+        case 203:
+            prefixSumFourthVersion();
+            break;
+        case 204: 
+            prefixSumFifthVersion();
             break;
         }
         printf("press a key to continue");
