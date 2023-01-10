@@ -6,6 +6,7 @@
 #include<conio.h>
 #include "../CudaExamples/slides/01_prefixsum.h";
 #include "../CudaExamples/slides/02_mergesort.h";
+#include "../CudaExamples/slides/03_sharedmemory.h";
 // permette di stabilire se abilitare o meno la modalità console per alcuni degli esempi
 int main()
 {
@@ -40,6 +41,8 @@ int main()
         printf("-----------\n");
         printf("205_mergesort\n");
         printf("206_mergesort (rank single block)\n");
+        printf("-----------\n");
+        printf("207_parallelReductionShared\n");
         printf("\n");
         scanf("%d", &selection);
         printf("\n");
@@ -117,6 +120,9 @@ int main()
             break;
         case 206: 
             mergeSortRankBlock();
+            break;
+        case 207:
+            parallelReductionShared();
             break;
         }
         printf("press a key to continue");

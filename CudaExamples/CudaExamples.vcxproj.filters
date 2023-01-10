@@ -25,5 +25,8 @@
     <ClInclude Include="slides\02_mergesort.h">
       <Filter>slides</Filter>
     </ClInclude>
+    <ClInclude Include="slides\03_sharedmemory.h">
+      <Filter>slides</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
