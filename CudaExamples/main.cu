@@ -43,6 +43,9 @@ int main()
         printf("206_mergesort (rank single block)\n");
         printf("-----------\n");
         printf("207_parallelReductionShared\n");
+        printf("208_parallelReductionSharedOptimized\n");
+        printf("209_parallelReductionSharedOptimizedWarp\n");
+        printf("210_mergeSortTiledShared (merge sort using the shared memory)");
         printf("\n");
         scanf("%d", &selection);
         printf("\n");
@@ -123,6 +126,15 @@ int main()
             break;
         case 207:
             parallelReductionShared();
+            break;
+        case 208:
+            parallelReductionSharedOptimized();
+            break;
+        case 209:
+            parallelReductionSharedOptimizedWarp();
+            break;
+        case 210:
+            mergeSortTiledShared();
             break;
         }
         printf("press a key to continue");

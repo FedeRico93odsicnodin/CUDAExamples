@@ -76,8 +76,12 @@ E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/01_prefixsum.h(369): war
 E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/01_prefixsum.h(379): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/01_prefixsum.h(468): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/01_prefixsum.h(477): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/03_sharedmemory.h(77): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/03_sharedmemory.h(87): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/03_sharedmemory.h(79): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/03_sharedmemory.h(89): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/03_sharedmemory.h(164): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/03_sharedmemory.h(173): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/03_sharedmemory.h(246): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/03_sharedmemory.h(255): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 E:\GIT\CUDAExamples\CudaExamples\schoolbook\samples_1.h(1588): warning C4715: 'nestedReduce': not all control paths return a value
   
   E:\GIT\CUDAExamples\CudaExamples>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin\nvcc.exe" -dlink -o x64\Debug\CudaExamples.device-link.obj -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /Zi /RTC1 /MDd " -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin/crt" -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\lib\x64" cudart_static.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib cudadevrt.lib cudart.lib  -gencode=arch=compute_52,code=sm_52 -G --machine 64 E:\GIT\CUDAExamples\CudaExamples\x64\Debug\main.cu.obj 
@@ -97,4 +101,6 @@ E:\GIT\CUDAExamples\CudaExamples\schoolbook\samples_1.h(1588): warning C4715: 'n
   cudadevrt.lib
   cudart.lib
   main.cu.obj
+     Creating library E:\GIT\CUDAExamples\x64\Debug\CudaExamples.lib and object E:\GIT\CUDAExamples\x64\Debug\CudaExamples.exp
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   CudaExamples.vcxproj -> E:\GIT\CUDAExamples\x64\Debug\CudaExamples.exe
