@@ -10,6 +10,9 @@
     <Filter Include="slides">
       <UniqueIdentifier>{56d84bc5-1523-4e35-a8cc-44d8fa3b3ca7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{741e0c0d-97a9-44bf-aa21-6ba58b8c5425}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="schoolbook\samples_1.h">
@@ -27,6 +30,12 @@
     </ClInclude>
     <ClInclude Include="slides\03_sharedmemory.h">
       <Filter>slides</Filter>
+    </ClInclude>
+    <ClInclude Include="slides\04_histograms.h">
+      <Filter>slides</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\utilfunctions.h">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

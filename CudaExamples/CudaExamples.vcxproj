@@ -87,6 +87,8 @@
     <ClInclude Include="slides\01_prefixsum.h" />
     <ClInclude Include="slides\02_mergesort.h" />
     <ClInclude Include="slides\03_sharedmemory.h" />
+    <ClInclude Include="slides\04_histograms.h" />
+    <ClInclude Include="utils\utilfunctions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

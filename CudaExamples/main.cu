@@ -7,6 +7,7 @@
 #include "../CudaExamples/slides/01_prefixsum.h";
 #include "../CudaExamples/slides/02_mergesort.h";
 #include "../CudaExamples/slides/03_sharedmemory.h";
+#include "../CudaExamples/slides/04_histograms.h";
 // permette di stabilire se abilitare o meno la modalità console per alcuni degli esempi
 int main()
 {
@@ -45,7 +46,9 @@ int main()
         printf("207_parallelReductionShared\n");
         printf("208_parallelReductionSharedOptimized\n");
         printf("209_parallelReductionSharedOptimizedWarp\n");
-        printf("210_mergeSortTiledShared (merge sort using the shared memory)");
+        printf("210_mergeSortTiledShared (merge sort using the shared memory)\n");
+        printf("-----------\n");
+        printf("211_histograms on GPU");
         printf("\n");
         scanf("%d", &selection);
         printf("\n");
@@ -136,6 +139,8 @@ int main()
         case 210:
             mergeSortTiledShared();
             break;
+        case 211: 
+            histogramGPU();
         }
         printf("press a key to continue");
         getch();
