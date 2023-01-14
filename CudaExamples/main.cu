@@ -48,7 +48,9 @@ int main()
         printf("209_parallelReductionSharedOptimizedWarp\n");
         printf("210_mergeSortTiledShared (merge sort using the shared memory)\n");
         printf("-----------\n");
-        printf("211_histograms on GPU");
+        printf("211_histograms on GPU\n");
+        printf("212_histograms on GPU (Coalesced) - (TO CHECK)\n");
+        printf("213_histograms on GPU (Coalesced - Privatize bins)\n");
         printf("\n");
         scanf("%d", &selection);
         printf("\n");
@@ -141,6 +143,13 @@ int main()
             break;
         case 211: 
             histogramGPU();
+            break;
+        case 212: 
+            histogramGPUCoalesced();
+            break;
+        case 213:
+            histogramGPUCoalescedPrivate();
+            break;
         }
         printf("press a key to continue");
         getch();
