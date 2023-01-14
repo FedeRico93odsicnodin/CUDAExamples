@@ -8,6 +8,7 @@
 #include "../CudaExamples/slides/02_mergesort.h";
 #include "../CudaExamples/slides/03_sharedmemory.h";
 #include "../CudaExamples/slides/04_histograms.h";
+#include "../CudaExamples/slides/05_convolution.h";
 // permette di stabilire se abilitare o meno la modalità console per alcuni degli esempi
 int main()
 {
@@ -51,6 +52,8 @@ int main()
         printf("211_histograms on GPU\n");
         printf("212_histograms on GPU (Coalesced) - (TO CHECK)\n");
         printf("213_histograms on GPU (Coalesced - Privatize bins)\n");
+        printf("-----------\n");
+        printf("214_convolution\n");
         printf("\n");
         scanf("%d", &selection);
         printf("\n");
@@ -149,6 +152,9 @@ int main()
             break;
         case 213:
             histogramGPUCoalescedPrivate();
+            break;
+        case 214: 
+            convolution();
             break;
         }
         printf("press a key to continue");
