@@ -9,6 +9,7 @@
 #include "../CudaExamples/slides/03_sharedmemory.h";
 #include "../CudaExamples/slides/04_histograms.h";
 #include "../CudaExamples/slides/05_convolution.h";
+#include "../CudaExamples/slides/06_sparsematrices.h";
 // permette di stabilire se abilitare o meno la modalità console per alcuni degli esempi
 int main()
 {
@@ -55,6 +56,8 @@ int main()
         printf("-----------\n");
         printf("214_convolution\n");
         printf("215_convolution all image support\n");
+        printf("-----------\n");
+        printf("216_spmv-csr\n");
         printf("\n");
         scanf("%d", &selection);
         printf("\n");
@@ -159,6 +162,9 @@ int main()
             break;
         case 215: 
             convolution_allimagesupport();
+        case 216:
+            spmv_csr_main();
+            break;
         }
         printf("press a key to continue");
         getch();

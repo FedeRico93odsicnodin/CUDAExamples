@@ -34,5 +34,8 @@
     <ClInclude Include="slides\05_convolution.h">
       <Filter>slides</Filter>
     </ClInclude>
+    <ClInclude Include="slides\06_sparsematrices.h">
+      <Filter>slides</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -89,6 +89,7 @@
     <ClInclude Include="slides\03_sharedmemory.h" />
     <ClInclude Include="slides\04_histograms.h" />
     <ClInclude Include="slides\05_convolution.h" />
+    <ClInclude Include="slides\06_sparsematrices.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
