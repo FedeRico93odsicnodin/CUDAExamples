@@ -54,6 +54,7 @@ int main()
         printf("213_histograms on GPU (Coalesced - Privatize bins)\n");
         printf("-----------\n");
         printf("214_convolution\n");
+        printf("215_convolution all image support\n");
         printf("\n");
         scanf("%d", &selection);
         printf("\n");
@@ -156,6 +157,8 @@ int main()
         case 214: 
             convolution();
             break;
+        case 215: 
+            convolution_allimagesupport();
         }
         printf("press a key to continue");
         getch();

@@ -27,6 +27,10 @@ E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/04_histograms.h(150): wa
 E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/04_histograms.h(256): warning #550-D: variable "read" was set but never used
   
   device_functions.h is an internal header file and must not be used directly.  This file will be removed in a future CUDA release.  Please use cuda_runtime_api.h or cuda_runtime.h instead.
+E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/05_convolution.h(255): warning #550-D: variable "start_cpu" was set but never used
+  
+E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/05_convolution.h(255): warning #550-D: variable "end_cpu" was set but never used
+  
 E:\GIT\CUDAExamples\CudaExamples\main.cu(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 E:\GIT\CUDAExamples\CudaExamples\main.cu(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 E:\GIT\CUDAExamples\CudaExamples\main.cu(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
@@ -121,9 +125,10 @@ E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/04_histograms.h(281): wa
 E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/04_histograms.h(291): warning C4477: 'printf' : format string '%ld' requires an argument of type 'long', but variadic argument 1 has type 'size_t'
   E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/04_histograms.h(291): note: consider using '%zd' in the format string
   device_functions.h is an internal header file and must not be used directly.  This file will be removed in a future CUDA release.  Please use cuda_runtime_api.h or cuda_runtime.h instead.
-E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/05_convolution.h(45): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/05_convolution.h(50): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/05_convolution.h(133): warning C4305: '=': truncation from 'double' to 'float'
+E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/05_convolution.h(43): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/05_convolution.h(48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/05_convolution.h(138): warning C4305: '=': truncation from 'double' to 'float'
+E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/05_convolution.h(272): warning C4305: '=': truncation from 'double' to 'float'
 E:\GIT\CUDAExamples\CudaExamples\schoolbook\samples_1.h(1588): warning C4715: 'nestedReduce': not all control paths return a value
   
   E:\GIT\CUDAExamples\CudaExamples>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin\nvcc.exe" -dlink -o x64\Debug\CudaExamples.device-link.obj -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /Zi /RTC1 /MDd " -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin/crt" -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\lib\x64" cudart_static.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib cudadevrt.lib cudart.lib  -gencode=arch=compute_52,code=sm_52 -G --machine 64 E:\GIT\CUDAExamples\CudaExamples\x64\Debug\main.cu.obj 
@@ -143,4 +148,6 @@ E:\GIT\CUDAExamples\CudaExamples\schoolbook\samples_1.h(1588): warning C4715: 'n
   cudadevrt.lib
   cudart.lib
   main.cu.obj
+     Creating library E:\GIT\CUDAExamples\x64\Debug\CudaExamples.lib and object E:\GIT\CUDAExamples\x64\Debug\CudaExamples.exp
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   CudaExamples.vcxproj -> E:\GIT\CUDAExamples\x64\Debug\CudaExamples.exe
