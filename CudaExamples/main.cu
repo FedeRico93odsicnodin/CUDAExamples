@@ -58,6 +58,7 @@ int main()
         printf("215_convolution all image support\n");
         printf("-----------\n");
         printf("216_spmv-csr\n");
+        printf("217_spmv-coo\n");
         printf("\n");
         scanf("%d", &selection);
         printf("\n");
@@ -165,6 +166,8 @@ int main()
         case 216:
             spmv_csr_main();
             break;
+        case 217:
+            spmv_csr_main_coo();
         }
         printf("press a key to continue");
         getch();
