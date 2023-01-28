@@ -36,6 +36,7 @@ int main()
         printf("16_simplemMemTransfer\n");
         printf("17_sumArraysZeroCopy\n");
         printf("18_readSegment\n");
+        printf("19_simple math AoS\n");
         printf("\n---- SLIDES EXAMPLES ----\n");
         printf("200_prefixsum\n");
         printf("201_prefixsum (second version)\n");
@@ -119,6 +120,9 @@ int main()
             break;
         case 18:
             readSegment();
+            break;
+        case 19:
+            simpleMathAoS();
             break;
         case 200:
             prefixSumFirstVersion();
