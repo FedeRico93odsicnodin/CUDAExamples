@@ -38,6 +38,7 @@ int main()
         printf("18_readSegment\n");
         printf("19_simple math AoS\n");
         printf("20_simple math SoA\n");
+        printf("21_read segment unroll (2 - 4)\n");
         printf("\n---- SLIDES EXAMPLES ----\n");
         printf("200_prefixsum\n");
         printf("201_prefixsum (second version)\n");
@@ -127,6 +128,9 @@ int main()
             break;
         case 20:
             simpleMathSoA();
+            break;
+        case 21:
+            readSegmentUnroll();
             break;
         case 200:
             prefixSumFirstVersion();

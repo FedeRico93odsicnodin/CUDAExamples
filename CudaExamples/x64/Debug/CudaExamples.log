@@ -153,4 +153,6 @@ E:\GIT\CUDAExamples\CudaExamples\schoolbook\samples_2.h(629): warning C4715: 'si
   cudadevrt.lib
   cudart.lib
   main.cu.obj
+     Creating library E:\GIT\CUDAExamples\x64\Debug\CudaExamples.lib and object E:\GIT\CUDAExamples\x64\Debug\CudaExamples.exp
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   CudaExamples.vcxproj -> E:\GIT\CUDAExamples\x64\Debug\CudaExamples.exe
