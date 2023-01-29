@@ -483,3 +483,147 @@ void simpleMathAoS() {
     CHECK(cudaDeviceReset());
     return;
 }
+
+// functions for inner array outer struct 
+void initialInnerArray(innerArray* ip, int size) {
+    for (int i = 0; i < size; i++) {
+        ip->x[i] = (float)(rand() & 0xFF) / 100.0f;
+        ip->y[i] = (float)(rand() & 0xFF) / 100.0f;
+    }
+
+    return;
+}
+
+void testInnerArrayHost(innerArray* A, innerArray* C, const int n) {
+    for (int idx = 0; idx < n; idx++) {
+        C->x[idx] = A->x[idx] + 10.f;
+        C->y[idx] = A->y[idx] + 20.f;
+    }
+    
+    return;
+}
+
+void printHostResult(innerArray* C, const int n) {
+    for (int idx = 0; idx < n; idx++) {
+        printf("printout idx %d: x %f y %f\n", idx, C->x[idx], C->y[idx]);
+    }
+
+    return;
+}
+
+void checkInnerArray(innerArray* hostRef, innerArray* gpuRef, const int N) {
+    double epsilon = 1.0E-8;
+    bool match = 1;
+
+    for (int i = 0; i < N; i++) {
+        if (abs(hostRef->x[i] - gpuRef->x[i]) > epsilon) {
+            match = 0;
+            printf("different on x %dth element: host %f gpu %f\n", i, hostRef->x[i], gpuRef->x[i]);
+            break;
+        }
+        if (abs(hostRef->y[i] - gpuRef->y[i]) > epsilon) {
+            match = 0;
+            printf("different on y %dth element: host %f gpu %f\n", i, hostRef->y[i], gpuRef->y[i]);
+            break;
+        }
+    }
+
+    if (!match) printf("arrays do not match.\n\n");
+}
+
+__global__ void testInnerArray(innerArray* data, innerArray* result, const int n) {
+    unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (i < n) {
+        float tmpx = data->x[i];
+        float tmpy = data->y[i];
+
+        tmpx += 10.f;
+        tmpy = 20.f;
+        result->x[i] = tmpx;
+        result->y[i] = tmpy;
+    }
+}
+
+__global__ void warmup2(innerArray* data, innerArray* result, const int n) {
+    unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (i < n) {
+        float tmpx = data->x[i];
+        float tmpy = data->y[i];
+        tmpx += 10.f;
+        tmpy += 20.f;
+        result->x[i] = tmpx;
+        result->y[i] = tmpy;
+    }
+}
+
+// test the array of struct 
+int simpleMathSoA() {
+    // set up the device 
+    int dev = 0;
+    cudaDeviceProp deviceProp;
+    CHECK(cudaGetDeviceProperties(&deviceProp, dev));
+    printf("device %d: %s\n", dev, deviceProp.name);
+    CHECK(cudaSetDevice(dev));
+
+    // allocate host memory 
+    int nElem = LEN;
+    size_t nBytes = sizeof(innerArray);
+    innerArray* h_A = (innerArray*)malloc(nBytes);
+    innerArray* hostRef = (innerArray*)malloc(nBytes);
+    innerArray* gpuRef = (innerArray*)malloc(nBytes);
+
+    // initialize host array 
+    initialInnerArray(h_A, nElem);
+    testInnerArrayHost(h_A, hostRef, nElem);
+
+    // allocate device memory
+    innerArray* d_A, * d_C;
+    CHECK(cudaMalloc((innerArray**)&d_A, nBytes));
+    CHECK(cudaMalloc((innerArray**)&d_C, nBytes));
+
+    // copy data from host to device 
+    CHECK(cudaMemcpy(d_A, h_A, nBytes, cudaMemcpyHostToDevice));
+
+    // set up offset for summary 
+    int blocksize = 128;
+    int selectedBlockSize = 0;
+    printf("please select the preferred block size (default 0 = 128");
+    scanf("%d", &selectedBlockSize);
+    if (selectedBlockSize > 0)
+        blocksize = selectedBlockSize;
+
+    // execution configuration 
+    dim3 block(blocksize, 1);
+    dim3 grid((nElem + block.x - 1) / block.x, 1);
+
+    // kernel 1
+    double iStart = seconds();
+    warmup2 << <grid, block >> > (d_A, d_C, nElem);
+    CHECK(cudaDeviceSynchronize());
+    double iElaps = seconds() - iStart;
+    printf("warmup2 <<< %3d, %3d >>> elapsed %f sec\n", grid.x, block.x, iElaps);
+    CHECK(cudaMemcpy(gpuRef, d_C, nBytes, cudaMemcpyDeviceToHost));
+    checkInnerArray(hostRef, gpuRef, nElem);
+    CHECK(cudaGetLastError());
+
+    iStart = seconds();
+    testInnerArray << <grid, block >> > (d_A, d_C, nElem);
+    CHECK(cudaDeviceSynchronize());
+    iElaps = seconds() - iStart;
+    printf("innerarray <<< %3d, %3d >>> elapsed %f sec\n", grid.x, block.x, iElaps);
+    CHECK(cudaMemcpy(gpuRef, d_C, nBytes, cudaMemcpyDeviceToHost));
+    checkInnerArray(hostRef, gpuRef, nElem);
+    CHECK(cudaGetLastError());
+
+    CHECK(cudaFree(d_A));
+    CHECK(cudaFree(d_C));
+    free(h_A);
+    free(hostRef);
+    free(gpuRef);
+
+    // reset device 
+    CHECK(cudaDeviceReset());
+    return;
+}

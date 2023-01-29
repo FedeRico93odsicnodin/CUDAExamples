@@ -134,6 +134,7 @@ E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/05_convolution.h(138): w
 E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/05_convolution.h(272): warning C4305: '=': truncation from 'double' to 'float'
   device_functions.h is an internal header file and must not be used directly.  This file will be removed in a future CUDA release.  Please use cuda_runtime_api.h or cuda_runtime.h instead.
 E:\GIT\CUDAExamples\CudaExamples\schoolbook\samples_1.h(1588): warning C4715: 'nestedReduce': not all control paths return a value
+E:\GIT\CUDAExamples\CudaExamples\schoolbook\samples_2.h(629): warning C4715: 'simpleMathSoA': not all control paths return a value
   
   E:\GIT\CUDAExamples\CudaExamples>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin\nvcc.exe" -dlink -o x64\Debug\CudaExamples.device-link.obj -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc143.pdb /Zi /RTC1 /MDd " -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin/crt" -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\lib\x64" cudart_static.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib cudadevrt.lib cudart.lib  -gencode=arch=compute_52,code=sm_52 -G --machine 64 E:\GIT\CUDAExamples\CudaExamples\x64\Debug\main.cu.obj 
   cudart_static.lib
@@ -152,6 +153,4 @@ E:\GIT\CUDAExamples\CudaExamples\schoolbook\samples_1.h(1588): warning C4715: 'n
   cudadevrt.lib
   cudart.lib
   main.cu.obj
-     Creating library E:\GIT\CUDAExamples\x64\Debug\CudaExamples.lib and object E:\GIT\CUDAExamples\x64\Debug\CudaExamples.exp
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   CudaExamples.vcxproj -> E:\GIT\CUDAExamples\x64\Debug\CudaExamples.exe
