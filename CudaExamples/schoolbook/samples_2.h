@@ -771,3 +771,292 @@ void readSegmentUnroll() {
     CHECK(cudaDeviceReset());
     return;
 }
+
+/*
+    Various memory access pattern optimizations applied to a matrix transpose 
+    kernel 
+*/
+void printData(float* in, const int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%dth element %f\n", i, in[i]);
+    }
+
+    return;
+}
+
+void transposeHost(float* out, float* in, const int nx, const int ny) {
+    for (int iy = 0; iy < ny; ++iy) {
+        for (int ix = 0; ix < nx; ++ix) {
+            out[ix * ny + iy] = in[iy * nx + ix];
+        }
+    }
+}
+
+__global__ void warmup_transpose(float* out, float* in, const int nx, const int ny) {
+    unsigned int ix = blockDim.x * blockIdx.x + threadIdx.x;
+    unsigned int iy = blockDim.y * blockIdx.y + threadIdx.y;
+
+    if (ix < nx && iy < ny) {
+        out[iy * nx + ix] = in[iy * nx + ix];
+    }
+}
+
+// case 0 copy kernel: access data rows
+__global__ void copyRow(float* out, float* in, const int nx, const int ny) {
+    unsigned int ix = blockDim.x * blockIdx.x + threadIdx.x;
+    unsigned int iy = blockDim.y * blockIdx.y + threadIdx.y;
+
+    if (ix < nx && iy < ny) {
+        out[iy * nx + ix] = in[iy * nx + ix];
+    }
+}
+
+// case 1 copy kernel: access data in columns
+__global__ void copyCol(float* out, float* in, const int nx, const int ny) {
+    unsigned int ix = blockDim.x * blockIdx.x + threadIdx.x;
+    unsigned int iy = blockDim.y * blockIdx.y + threadIdx.y;
+
+    if (ix < nx && iy < ny) {
+        out[ix * ny + iy] = in[ix * ny + iy];
+    }
+}
+
+// case 2 transpose kernel: read in rows and write in columns 
+__global__ void transposeNaiveRow(float* out, float* in, const int nx, const int ny) {
+    unsigned int ix = blockDim.x * blockIdx.x + threadIdx.x;
+    unsigned int iy = blockDim.y * blockIdx.y + threadIdx.y;
+
+    if (ix < nx && iy < ny) {
+        out[ix * ny + iy] = in[iy * nx + ix];
+    }
+}
+
+// case 3: transpose kernel: read in columns and write in rows
+__global__ void transposeNaiveCol(float* out, float* in, const int nx, const int ny) {
+    unsigned int ix = blockDim.x * blockIdx.x + threadIdx.x;
+    unsigned int iy = blockDim.y * blockIdx.y + threadIdx.y;
+
+    if (ix < nx && iy < ny) {
+        out[iy * nx + ix] = in[ix * ny + iy];
+    }
+}
+
+// case 4 transpose kernel: read in rows and write in columns + unroll 4 blocks
+__global__ void transposeUnroll4Row(float* out, float* in, const int nx, const int ny) {
+    unsigned int ix = blockDim.x * blockIdx.x * 4 + threadIdx.x;
+    unsigned int iy = blockDim.y * blockIdx.y + threadIdx.y;
+
+    unsigned int ti = iy * nx + ix; // access in rows
+    unsigned int to = ix * ny + iy; // access in columns
+
+    if (ix + 3 * blockDim.x < nx && iy < ny) {
+        out[to] = in[ti];
+        out[to + ny * blockDim.x] = in[ti + blockDim.x];
+        out[to + ny * 2 * blockDim.x] = in[ti + 2 * blockDim.x];
+        out[to + ny * 3 * blockDim.x] = in[ti + 3 * blockDim.x];
+    }
+}
+
+// case 5 transpose kernel: read in columns and write in rows + unroll 4 blocks
+__global__ void transposeUnroll4Col(float* out, float* in, const int nx, const int ny) {
+    unsigned int ix = blockDim.x * blockIdx.x * 4 + threadIdx.x;
+    unsigned int iy = blockDim.y * blockIdx.y + threadIdx.y;
+
+    unsigned int ti = iy * nx + ix; // access in rows
+    unsigned int to = ix * ny + iy; // access in columns 
+
+    if (ix + 3 * blockDim.x < nx && iy < ny) {
+        out[ti] = in[to];
+        out[ti + blockDim.x] = in[to + blockDim.x * ny];
+        out[ti + 2 * blockDim.x] = in[to + 2 * blockDim.x * ny];
+        out[ti + 3 * blockDim.x] = in[to + 3 * blockDim.x * ny];
+    }
+}
+
+/*
+    case 6: transpose kernel: read in rows and write in columns + 
+    diagonal coordinates transform 
+*/
+__global__ void transposeDiagonalRow(float* out, float* in, const int nx, const int ny) {
+    unsigned int blk_y = blockIdx.x;
+    unsigned int blk_x = (blockIdx.x + blockIdx.y) % gridDim.x;
+
+    unsigned int ix = blockDim.x * blk_x + threadIdx.x;
+    unsigned int iy = blockDim.y * blk_y + threadIdx.y;
+
+    if (ix < nx && iy < ny) {
+        out[ix * ny + iy] = in[iy * nx + ix];
+    }
+}
+
+/*
+    case 7: transpose kernel: read in columns and write in row + diagonal coordinate transform 
+*/
+__global__ void transposeDiagonalCol(float* out, float* in, const int nx, const int ny) {
+    unsigned int blk_y = blockIdx.x;
+    unsigned int blk_x = (blockIdx.x + blockIdx.y) % gridDim.x;
+
+    unsigned int ix = blockDim.x * blk_x + threadIdx.x;
+    unsigned int iy = blockDim.y * blk_y + threadIdx.y;
+
+    if (ix < nx && iy < ny) {
+        out[iy * nx + ix] = in[ix * ny + iy];
+    }
+}
+
+// main function 
+void transpose() {
+    // set up device 
+    int dev = 0;
+    cudaDeviceProp deviceProp;
+    CHECK(cudaGetDeviceProperties(&deviceProp, dev));
+    printf("device %d: %s ", dev, deviceProp.name);
+    CHECK(cudaSetDevice(dev));
+
+    // set up array size 2048
+    int nx = 1 << 11;
+    int ny = 1 << 11;
+    int nxDecision = 0;
+    int nyDecision = 0;
+
+    // select a kernel and block size 
+    int iKernel = 0;
+    int blockx = 16;
+    int blocky = 16;
+
+    // asking for input
+    // asking for the kernel to launch 
+    printf("select the desired kernel from the ones following:\n");
+    printf("0: CopyRow\n");
+    printf("1: CopyCol\n");
+    printf("2: NaiveRow\n");
+    printf("3: NaiveCol\n");
+    printf("4: Unroll4Row\n");
+    printf("5: Unroll4Col\n");
+    printf("6: DiagonalRow\n");
+    printf("7: DiagonalCol\n");
+    scanf(" %d", &iKernel);
+    // asking for the blockx
+    printf("please select the blockx (16):");
+    scanf(" %d", &blockx);
+    // asking for the blocky
+    printf("please select the blocky (16):");
+    scanf(" %d", &blocky);
+    // nx and ny indexes 
+    printf("select for nx (0 = default)");
+    scanf(" %d", &nxDecision);
+    if (nxDecision > 0)
+        nx = nxDecision;
+    printf("select for ny (0 = default)");
+    scanf(" %d", &nyDecision);
+    if (nyDecision > 0)
+        ny = nyDecision;
+
+    printf(" with matrix nx %d, ny %d with kernel %d\n", nx, ny, iKernel);
+    size_t nBytes = nx * ny * sizeof(float);
+
+    // execution configuration 
+    dim3 block(blockx, blocky);
+    dim3 grid((nx + block.x - 1) / block.x, (ny + block.y - 1) / block.y);
+
+    // allocate host memory 
+    float* h_A = (float*)malloc(nBytes);
+    float* hostRef = (float*)malloc(nBytes);
+    float* gpuRef = (float*)malloc(nBytes);
+
+    // initialize host array 
+    initialData(h_A, nx * ny);
+
+    // tranpose at host side 
+    transposeHost(hostRef, h_A, nx, ny);
+
+    // allocate device memory 
+    float* d_A, * d_C;
+    CHECK(cudaMalloc((float**)&d_A, nBytes));
+    CHECK(cudaMalloc((float**)&d_C, nBytes));
+
+    // copy data from host to device 
+    CHECK(cudaMemcpy(d_A, h_A, nBytes, cudaMemcpyHostToDevice));
+
+    // warmup to avoid startup overhead 
+    double iStart = seconds();
+    warmup_transpose << <grid, block >> > (d_C, d_A, nx, ny);
+    CHECK(cudaDeviceSynchronize());
+    double iElaps = seconds() - iStart;
+    printf("warmup elapsed %f sec\n", iElaps);
+    CHECK(cudaGetLastError());
+
+    // kernel pointer and descriptor 
+    void (*kernel)(float*, float*, int, int);
+    char* kernelName;
+
+    // set up kernel 
+    switch (iKernel) {
+    case 0: 
+        kernel = &copyRow;
+        kernelName = "CopyRow           ";
+        break;
+    case 1: 
+        kernel = &copyCol;
+        kernelName = "CopyCol           ";
+        break;
+    case 2: 
+        kernel = &transposeNaiveRow;
+        kernelName = "NaiveRow          ";
+        break;
+    case 3: 
+        kernel = &transposeNaiveCol;
+        kernelName = "NaiveCol          ";
+        break;
+    case 4: 
+        kernel = &transposeUnroll4Row;
+        kernelName = "Unroll4Row        ";
+    case 5: 
+        kernel = &transposeUnroll4Col;
+        kernelName = "Unroll4Col        ";
+        break;
+    case 6: 
+        kernel = &transposeDiagonalRow;
+        kernelName = "DiagonalRow       ";
+        break;
+    case 7:
+        kernel = &transposeDiagonalCol;
+        kernelName = "DiagonalCol       ";
+        break;
+    }
+
+    // run the kernel 
+    iStart = seconds();
+    kernel << <grid, block >> > (d_C, d_A, nx, ny);
+    CHECK(cudaDeviceSynchronize());
+    iElaps = seconds() - iStart;
+
+    // calculate effective bandwidth 
+    float ibnd = 2 * nx * ny * sizeof(float) / 1e9 / iElaps;
+    printf("%s elapsed %f sec <<< grid (%d,%d) block (%d,%d)>>> effective bandwidth %f GB\n",
+        kernelName
+        , iElaps
+        , grid.x
+        , grid.y
+        , block.x
+        , block.y
+        , ibnd);
+    CHECK(cudaGetLastError());
+
+    // check kernel results 
+    if (iKernel > 1) {
+        CHECK(cudaMemcpy(gpuRef, d_C, nBytes, cudaMemcpyDeviceToHost));
+        checkResult(hostRef, gpuRef, nx * ny);
+    }
+
+    // free host and device memory 
+    CHECK(cudaFree(d_A));
+    CHECK(cudaFree(d_C));
+    free(h_A);
+    free(hostRef);
+    free(gpuRef);
+
+    // reset device 
+    CHECK(cudaDeviceReset());
+    return;
+}

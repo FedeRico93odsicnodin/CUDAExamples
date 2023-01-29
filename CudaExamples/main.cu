@@ -39,6 +39,7 @@ int main()
         printf("19_simple math AoS\n");
         printf("20_simple math SoA\n");
         printf("21_read segment unroll (2 - 4)\n");
+        printf("22_transpose matrix\n");
         printf("\n---- SLIDES EXAMPLES ----\n");
         printf("200_prefixsum\n");
         printf("201_prefixsum (second version)\n");
@@ -131,6 +132,9 @@ int main()
             break;
         case 21:
             readSegmentUnroll();
+            break;
+        case 22:
+            transpose();
             break;
         case 200:
             prefixSumFirstVersion();

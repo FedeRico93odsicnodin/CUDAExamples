@@ -20,6 +20,22 @@ E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(1477): warning #1444-D: 
   
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(65): warning #226-D: invalid format string conversion
   
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(997): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1001): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1005): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1009): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1013): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1016): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1020): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1024): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
   device_functions.h is an internal header file and must not be used directly.  This file will be removed in a future CUDA release.  Please use cuda_runtime_api.h or cuda_runtime.h instead.
 E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/04_histograms.h(56): warning #550-D: variable "read" was set but never used
   
@@ -39,6 +55,22 @@ E:\GIT\CUDAExamples\CudaExamples\main.cu(9): warning C4067: unexpected tokens fo
 E:\GIT\CUDAExamples\CudaExamples\main.cu(10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 E:\GIT\CUDAExamples\CudaExamples\main.cu(11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 E:\GIT\CUDAExamples\CudaExamples\main.cu(12): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(997): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1001): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1005): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1009): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1013): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1016): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1020): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1024): warning #2464-D: conversion from a string literal to "char *" is deprecated
+  
   main.cu
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(557): warning C4477: 'printf' : format string '%lu' requires an argument of type 'unsigned long', but variadic argument 1 has type 'size_t'
   E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(557): note: consider using '%zu' in the format string
@@ -85,6 +117,7 @@ E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_1.h(1763): warning C4018: '<
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(64): warning C4476: 'printf' : unknown type field character 'M' in format specifier
 E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(64): warning C4474: 'printf' : too many arguments passed for format string
   E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(64): note: placeholders and their parameters expect 3 variadic arguments, but 4 were provided
+E:\GIT\CUDAExamples\CudaExamples\schoolbook/samples_2.h(1035): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/01_prefixsum.h(40): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/01_prefixsum.h(50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 E:\GIT\CUDAExamples\CudaExamples\../CudaExamples/slides/01_prefixsum.h(126): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
